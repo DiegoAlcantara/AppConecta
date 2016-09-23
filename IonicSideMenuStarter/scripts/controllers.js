@@ -45,4 +45,25 @@
 })
 
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
+
+    $scope.playListTitle = $stateParams.playlistId;
+
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: 'https://httpbin.org/get',
+        success: success,
+        error: err
+    });
+
+    function success(response) {
+        var s = JSON.stringify(response);
+        alert(s);
+    }
+
+
+    function err(response) {
+        alert("erro");
+    }
+
 });

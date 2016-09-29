@@ -3,7 +3,7 @@
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
     // Form data for the login modal
     $scope.loginData = {};
-
+    $scope.matricula = "0100000505";
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope
@@ -44,26 +44,48 @@
     ];
 })
 
-.controller('PlaylistCtrl', function ($scope, $stateParams) {
+.controller('PlaylistCtrl', function ($scope, $stateParams, $http) {
+
 
     $scope.playListTitle = $stateParams.playlistId;
 
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: 'https://httpbin.org/get',
-        success: success,
-        error: err
+})
+
+.controller('PontoCtrl', function ($scope, $stateParams,$http) {
+
+  
+   $scope.matricula = $stateParams.matricula;
+ 
+    //$.ajax({
+    //    type: "GET",
+    //    dataType: "json",
+    //    url: 'https://httpbin.org/get',
+    //    success: success,
+    //    error: err
+    //});
+
+
+    $http({
+        method: 'GET',
+        url: 'http://homologacao/apis/ponto/api/registrosDePonto/' + $scope.matricula
+    }).then(function successCallback(response) {
+        success(response);
+    }, function errorCallback(response) {
+        err(response);
     });
 
     function success(response) {
-        var s = JSON.stringify(response);
-        alert(s);
+
+        $scope.batidas = response;
+
+        //var s = JSON.stringify(response);
+        //alert(s);
     }
 
 
     function err(response) {
         alert("erro");
     }
+
 
 });

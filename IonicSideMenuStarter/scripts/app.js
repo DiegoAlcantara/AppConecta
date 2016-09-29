@@ -71,7 +71,25 @@ angular.module('angularApp', ['ionic', 'angularApp.controllers'])
                 controller: 'PlaylistCtrl'
             }
         }
+    })
+
+   .state('app.batidas', {
+        url: "/batidas/:matricula",
+        views: {
+            'menuContent': {
+                templateUrl: "templates/batidas.html",
+                controller: 'PontoCtrl'
+            }
+        }
     });
+
+
+    //$stateProvider.state('ponto', {
+    //    url:'/ponto',
+    //    templateUrl: 'templates/browse.html'
+    //})
+
+
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('app/playlists');
 });

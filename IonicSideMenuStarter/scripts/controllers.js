@@ -56,15 +56,6 @@
   
    $scope.matricula = $stateParams.matricula;
  
-    //$.ajax({
-    //    type: "GET",
-    //    dataType: "json",
-    //    url: 'https://httpbin.org/get',
-    //    success: success,
-    //    error: err
-    //});
-
-
     $http({
         method: 'GET',
         url: 'http://homologacao/apis/ponto/api/registrosDePonto/' + $scope.matricula
@@ -74,12 +65,11 @@
         err(response);
     });
 
+
+
     function success(response) {
 
         $scope.batidas = response;
-
-        //var s = JSON.stringify(response);
-        //alert(s);
     }
 
 
@@ -87,5 +77,65 @@
         alert("erro");
     }
 
+
+
+ $scope.RegistraPonto = function () {
+
+    
+
+
+        var post = {
+            "filial":"00",
+            "matricula":"000505",
+            "centroCusto": "CP20154",
+            "dataHora": new Date().toISOString(),
+            "modelo":"W",
+            "ip": "172.31.25.58"
+        }
+
+        
+        $.ajax({
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",
+            url: 'http://localhost:44519/api/RegistrarPonto/',
+            data: post,
+            dataType: 'text'
+        }).done(function (data, textStatus) {
+
+            
+            alert("sucesso");
+
+
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+
+            alert("merda");
+
+
+
+        }).always(function () { });
+
+        //$http({
+        //    method:'POST',
+        //    url: "http://localhost:44519/api/RegistrarPonto/",
+        //    Data: {
+        //        "filial": "00",
+        //        "matricula": "000505",
+        //        "centroCusto": "CP20154",
+        //        "dataHora": new Date().toLocaleString(),
+        //        "modelo": "W",
+        //        "ip": "172.31.25.58"
+        //    }
+        //}).then(function successCallback(response) {
+        //    success(response);
+
+        //}, function errorCallback(response) {
+
+        //    err(response);
+        //});
+
+
+
+    }
 
 });

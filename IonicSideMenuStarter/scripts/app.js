@@ -81,7 +81,7 @@ angular.module('angularApp', ['ionic', 'angularApp.controllers'])
                 controller: 'PontoCtrl'
             }
         }
-    });
+   });
 
 
     //$stateProvider.state('ponto', {

@@ -74,67 +74,47 @@
 
 
     function err(response) {
-        alert("erro");
+        alert("Erro:" +response.textStatus);
     }
 
 
 
  $scope.RegistraPonto = function () {
 
-    
-
-
-        var post = {
-            "filial":"00",
-            "matricula":"000505",
-            "centroCusto": "CP20154",
-            "dataHora": new Date().toISOString(),
-            "modelo":"W",
-            "ip": "172.31.25.58"
+         post = {
+            filial:"00",
+            matricula:"000505",
+            centroCusto: "CP20154",
+            dataHora: new Date().toISOString(),
+            modelo:"W",
+            ip: "172.31.25.58"
         }
 
         
         $.ajax({
             type: "POST",
-            contentType: "application/x-www-form-urlencoded",
-            url: 'http://localhost:44519/api/RegistrarPonto/',
-            data: post,
-            dataType: 'text'
-        }).done(function (data, textStatus) {
+            url: 'http://homologacao/apis/ponto/api/RegistrarPonto/',
+            data: post
+           
+        }).done(function (data, textStatus, jqXHR) {
 
             
-            alert("sucesso");
-
+            alert(jqXHR.responseText);
+          
 
 
         }).fail(function (jqXHR, textStatus, errorThrown) {
 
-            alert("merda");
+            alert(jqXHR.responseText);
 
+           
 
+        }).always(function () {
 
-        }).always(function () { });
+            document.location.reload(true);
+        });
 
-        //$http({
-        //    method:'POST',
-        //    url: "http://localhost:44519/api/RegistrarPonto/",
-        //    Data: {
-        //        "filial": "00",
-        //        "matricula": "000505",
-        //        "centroCusto": "CP20154",
-        //        "dataHora": new Date().toLocaleString(),
-        //        "modelo": "W",
-        //        "ip": "172.31.25.58"
-        //    }
-        //}).then(function successCallback(response) {
-        //    success(response);
-
-        //}, function errorCallback(response) {
-
-        //    err(response);
-        //});
-
-
+   
 
     }
 
